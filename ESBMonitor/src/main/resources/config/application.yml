@@ -1,0 +1,45 @@
+myProps: 
+     users: 
+        - name: zhushengjiang
+          phone: 15989412409
+        - name: litongjie
+          phone: 18601720015
+        - name: tangyihua
+          phone: 18616357320
+        - name: lvzhiqiang
+          phone: 18601722188
+        - name: fanjiming
+          phone: 18601722189
+        - name: qiwan
+          phone: 18217448147
+        - name: fanhaifeng
+          phone: 18602196565
+     servers:
+        - ip: 10.161.96.20
+          port: 811
+          username: ftpuser1
+          password: oss20Ffp1
+          potocol: ftp
+          name: wx_ftp
+          owner: qiwan,litongjie,fanjiming
+          user: tangyihua,lvzhiqiang
+        - ip: 10.161.96.3
+          port: 811
+          username: ftpuser5
+          password: oss20Ffp5
+          potocol: ftp
+          name: ps_ftp
+          owner: qiwan,litongjie,fanjiming
+          user: fanhaifeng,zhushengjiang
+     tasks: 
+        - name: wx_zte_pm
+          source: wx_ftp
+          path: /LTE/MOBILE/ZTE/OMC1/PM
+          period: hourly
+          desc: ftp://10.161.96.20:811@ftpuser1:oss20Ffp1:/LTE/MOBILE/ZTE/OMC1/PM
+        - name: ps_hw_xdr
+          source: ps_ftp
+          path: /LTE/MOBILE/HUAWEI/OMC1/XDR/20170315
+          period: hourly
+          desc: ftp://10.161.96.3:811@ftpuser5:oss20Ffp5:/LTE/MOBILE/HUAWEI/OMC1/XDR/20170314
+    

@@ -1,0 +1,4 @@
+my:
+    item:
+       - dev.bar.com ftp://10.161.96.20:811@ftpuser1:oss20Ffp1:/LTE/MOBILE/ZTE/OMC1/PM
+       - foo.bar.com

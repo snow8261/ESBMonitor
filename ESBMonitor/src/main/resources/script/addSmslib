@@ -1,0 +1,14 @@
+mvn install:install-file -Dfile=e:\java\lib\sendsms-1.0.jar -DgroupId=cn.chinaunicom
+-DartifactId=sendsms -Dversion=1.0 -Dpackaging=jar
+
+SendSmsServiceSoap_address=http://10.0.72.231/SmsWebService/SendSmsService.asmx
+
+在 mirrors中增加
+<mirror> 
+<id>alimaven</id> 
+<mirrorOf>central</mirrorOf> 
+<name>aliyun maven</name> 
+<url>http://maven.aliyun.com/nexus/content/repositories/central/</url> 
+</mirror> 
+
+spring boot 打包
