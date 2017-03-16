@@ -22,7 +22,7 @@ myProps:
           potocol: ftp
           name: wx_ftp
           owner: qiwan,litongjie,fanjiming
-          user: tangyihua,lvzhiqiang
+          user: tangyihua,lvzhiqiang,fanjiming,litongjie
         - ip: 10.161.96.3
           port: 811
           username: ftpuser5
@@ -30,16 +30,20 @@ myProps:
           potocol: ftp
           name: ps_ftp
           owner: qiwan,litongjie,fanjiming
-          user: fanhaifeng,zhushengjiang
+          user: fanhaifeng,zhushengjiang,litongjie,fanjiming
      tasks: 
         - name: wx_zte_pm
           source: wx_ftp
           path: /LTE/MOBILE/ZTE/OMC1/PM
           period: hourly
           desc: ftp://10.161.96.20:811@ftpuser1:oss20Ffp1:/LTE/MOBILE/ZTE/OMC1/PM
+          namecn: 无线网中兴PMOMC1
+          threshold: 1
         - name: ps_hw_xdr
           source: ps_ftp
-          path: /LTE/MOBILE/HUAWEI/OMC1/XDR/20170315
+          path: /LTE/MOBILE/HUAWEI/OMC1/XDR
           period: hourly
-          desc: ftp://10.161.96.3:811@ftpuser5:oss20Ffp5:/LTE/MOBILE/HUAWEI/OMC1/XDR/20170314
+          desc: ftp://10.161.96.3:811@ftpuser5:oss20Ffp5:/LTE/MOBILE/HUAWEI/OMC1/XDR
+          namecn: 核心网华为PSXDR
+          threshold: 20
     

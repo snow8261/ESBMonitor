@@ -21,6 +21,7 @@ public class MainConfiguration implements InitializingBean {
 	 private List<Task> tasks=new ArrayList<Task>();
 	 private Map<String,Server> name2server=new HashMap<>();
 	 private Map<String,User> name2user= new HashMap<>();
+	
 	public List<Task> getTasks() {
 		return tasks;
 	}
@@ -60,6 +61,9 @@ public class MainConfiguration implements InitializingBean {
 		return name2server.get(name);
 	}
 	
+	public User getUserbyName(String name){
+		return name2user.get(name);
+	}
 	//public 
 	
 }

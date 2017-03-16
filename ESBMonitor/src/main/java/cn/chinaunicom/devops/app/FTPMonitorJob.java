@@ -48,7 +48,9 @@ public class FTPMonitorJob {
 		String source = task.getSource();
 		Server server = mainConfiguration.getServerByName(source);
 		String path = task.getPath();
+		
 		String owner = server.getOwner();
+		String user=server.getUser();
 		List<String> files = listRemoteFiles(server, path);
 		List<SMSMessage> ms = new ArrayList<SMSMessage>();
 		SMSMessage mess = new SMSMessage();

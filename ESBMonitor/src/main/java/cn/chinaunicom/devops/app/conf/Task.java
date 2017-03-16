@@ -11,6 +11,20 @@ public class Task {
 	private String path;
 	private String period;
 	private String desc;
+	private String namecn;
+	private String threshold; 
+	public String getThreshold() {
+		return threshold;
+	}
+	public void setThreshold(String threshold) {
+		this.threshold = threshold;
+	}
+	public String getNamecn() {
+		return namecn;
+	}
+	public void setNamecn(String namecn) {
+		this.namecn = namecn;
+	}
 	public String getName() {
 		return name;
 	}
