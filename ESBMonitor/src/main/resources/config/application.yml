@@ -31,6 +31,14 @@ myProps:
           name: ps_ftp
           owner: qiwan,litongjie,fanjiming
           user: fanhaifeng,zhushengjiang,litongjie,fanjiming
+        - ip: 10.162.6.225
+          port: 21
+          username: open_wy_pftp
+          password: WY_ftp_0614
+          potocol: ftp
+          name: zb_ftp
+          owner: qiwan,litongjie,fanjiming
+          user: tangyihua,lvzhiqiang,fanjiming,litongjie     
      tasks: 
         - name: wx_zte_pm
           source: wx_ftp
@@ -39,11 +47,95 @@ myProps:
           desc: ftp://10.161.96.20:811@ftpuser1:oss20Ffp1:/LTE/MOBILE/ZTE/OMC1/PM
           namecn: 无线网中兴PMOMC1
           threshold: 1
+        - name: wx_hw_pm
+          source: wx_ftp
+          path: /LTE/MOBILE/HUAWEI/OMC1/PM
+          period: hourly
+          desc: ftp://10.161.96.20:811@ftpuser1:oss20Ffp1:/LTE/MOBILE/HUAWEI/OMC1/PM
+          namecn: 无线网华为PMOMC1
+          threshold: 1
+        - name: wx_nk_pm
+          source: wx_ftp
+          path: /LTE/MOBILE/NOKIA/OMC1/PM
+          period: hourly
+          desc: ftp://10.161.96.20:811@ftpuser1:oss20Ffp1:/LTE/MOBILE/NOKIA/OMC1/PM
+          namecn: 无线网诺西PMOMC1
+          threshold: 1
+        - name: wx_zte_cm
+          source: wx_ftp
+          path: /LTE/MOBILE/ZTE/OMC1/CM
+          period: daily
+          desc: ftp://10.161.96.20:811@ftpuser1:oss20Ffp1:/LTE/MOBILE/ZTE/OMC1/CM
+          namecn: 无线网中兴CMOMC1
+          threshold: 1
+        - name: wx_hw_cm
+          source: wx_ftp
+          path: /LTE/MOBILE/HUAWEI/OMC1/CM
+          period: daily
+          desc: ftp://10.161.96.20:811@ftpuser1:oss20Ffp1:/LTE/MOBILE/HUAWEI/OMC1/CM
+          namecn: 无线网华为CMOMC1
+          threshold: 1
+        - name: wx_nk_cm
+          source: wx_ftp
+          path: /LTE/MOBILE/NOKIA/OMC1/CM
+          period: daily
+          desc: ftp://10.161.96.20:811@ftpuser1:oss20Ffp1:/LTE/MOBILE/NOKIA/OMC1/CM
+          namecn: 无线网诺西CMOMC1
+          threshold: 1
+        - name: wx_zte_mr
+          source: wx_ftp
+          path: /LTE/MOBILE/ZTE/OMC1/MR
+          period: hourly
+          desc: ftp://10.161.96.20:811@ftpuser1:oss20Ffp1:/LTE/MOBILE/ZTE/OMC1/MR
+          namecn: 无线网中兴MROMC1
+          threshold: 1
+        - name: wx_hw_mr
+          source: wx_ftp
+          path: /LTE/MOBILE/HUAWEI/OMC1/MR
+          period: hourly
+          desc: ftp://10.161.96.20:811@ftpuser1:oss20Ffp1:/LTE/MOBILE/HUAWEI/OMC1/MR
+          namecn: 无线网华为MROMC1
+          threshold: 1
+        - name: wx_nk_mr
+          source: wx_ftp
+          path: /LTE/MOBILE/NOKIA/OMC1/MR
+          period: hourly
+          desc: ftp://10.161.96.20:811@ftpuser1:oss20Ffp1:/LTE/MOBILE/NOKIA/OMC1/MR
+          namecn: 无线网诺西MROMC1
+          threshold: 1
+        - name: wx_zte_trace
+          source: wx_ftp
+          path: /LTE/MOBILE/ZTE/OMC1/TRACE
+          period: hourly
+          desc: ftp://10.161.96.20:811@ftpuser1:oss20Ffp1:/LTE/MOBILE/ZTE/OMC1/TRACE
+          namecn: 无线网中兴TRACEOMC1
+          threshold: 1
+        - name: wx_hw_trace
+          source: wx_ftp
+          path: /LTE/MOBILE/HUAWEI/OMC1/TRACE
+          period: hourly
+          desc: ftp://10.161.96.20:811@ftpuser1:oss20Ffp1:/LTE/MOBILE/HUAWEI/OMC1/TRACE
+          namecn: 无线网华为TRACEOMC1
+          threshold: 1
+        - name: wx_nk_trace
+          source: wx_ftp
+          path: /LTE/MOBILE/NOKIA/OMC1/TRACE
+          period: hourly
+          desc: ftp://10.161.96.20:811@ftpuser1:oss20Ffp1:/LTE/MOBILE/NOKIA/OMC1/TRACE
+          namecn: 无线网诺西TRACEOMC1
+          threshold: 1
         - name: ps_hw_xdr
           source: ps_ftp
           path: /LTE/MOBILE/HUAWEI/OMC1/XDR
           period: hourly
           desc: ftp://10.161.96.3:811@ftpuser5:oss20Ffp5:/LTE/MOBILE/HUAWEI/OMC1/XDR
           namecn: 核心网华为PSXDR
+          threshold: 2
+          delay: 20
+        - name: cs_zte_xdr
+          source: ps_ftp
+          path: /WCDMA/MOBILE/ZTE/OMC/XDR
+          period: hourly
+          desc: ftp://10.161.96.20:811@ftpuser2:oss20Ffp2:/WCDMA/MOBILE/ZTE/OMC/XDR
+          namecn: 核心网中兴CSXDR
           threshold: 20
-    

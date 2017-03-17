@@ -2,6 +2,8 @@ package cn.chinaunicom.devops.app;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -9,6 +11,8 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.net.ftp.FTPClient;
@@ -29,6 +33,9 @@ import cn.chinaunicom.devops.esbmonitor.object.FtpConfig;
 public class FTPMonitorJob {
 	@Autowired
 	private MainConfiguration mainConfiguration;
+	
+	private  Pattern pattern = Pattern.compile("_(20\\d{2}\\d{2}\\d{2}\\d{2}\\d{2}\\d{2})");
+	private SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
 	
 	private Task task;
 
@@ -51,7 +58,7 @@ public class FTPMonitorJob {
 		
 		String owner = server.getOwner();
 		String user=server.getUser();
-		List<String> files = listRemoteFiles(server, path);
+		List<String> files = listRemoteFiles(server, path,0);
 		List<SMSMessage> ms = new ArrayList<SMSMessage>();
 		SMSMessage mess = new SMSMessage();
 		mess.setContent("files 个数" + files.size());
@@ -62,7 +69,7 @@ public class FTPMonitorJob {
 		sender.sendSMS(ms);
 	}
 
-	public List<String> listRemoteFiles(Server ftpserver, String path) {
+	public List<String> listRemoteFiles(Server ftpserver, String path,int delay) {
 		FTPClient ftp = new FTPClient();
 		FTPClientConfig config = new FTPClientConfig();
 		ftp.configure(config);
@@ -92,11 +99,37 @@ public class FTPMonitorJob {
 					@Override
 					public boolean accept(FTPFile file) {
 						LocalDateTime today = LocalDateTime.now();
-						today = today.minusHours(1);
+						
+						LocalDateTime now1hour = today.minusHours(1);
 						Calendar fileTime = file.getTimestamp();
 						Date ft = fileTime.getTime();
 						LocalDateTime filedate = ft.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-						return today.isBefore(filedate);
+						boolean timecheck=now1hour.isBefore(filedate);
+						if(delay<=0){
+							return timecheck;
+						}else {
+							LocalDateTime nowdelay=today.minusHours(delay);
+							String filename=file.getName();
+							Date frealtime= getDatefromFileName(filename);
+							LocalDateTime filerdate = frealtime.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+							return  timecheck&& nowdelay.isBefore(filerdate);
+						}
+					}
+
+					private Date getDatefromFileName(String filename) {
+						Date d=null;
+						Matcher matcher = pattern.matcher(filename);
+						if (matcher.find()) {
+							String datestr= matcher.group(1);
+							 try {
+								d= df.parse(datestr);
+							} catch (ParseException e) {
+								e.printStackTrace();
+							}
+						}else {
+						    System.err.println("Match not found "+ filename);
+						}
+						return d;
 					}
 				});
 				for (FTPFile ftpfile : files) {

@@ -16,8 +16,8 @@ public class MainSchedule {
     @Autowired 
     private FTPMonitorTask ftpmonitortask;
     
-
-    @Scheduled(cron="59 55 0/1 * * ?") 
+     //59 55 0/1 * * ?
+    @Scheduled(cron="59 55 4-22 * * ?") 
     public void executeHourFileCheckTask() {
 
         // 间隔1小时,执行工单上传任务     

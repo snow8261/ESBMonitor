@@ -13,6 +13,13 @@ public class Task {
 	private String desc;
 	private String namecn;
 	private String threshold; 
+	private String delay;
+	public String getDelay() {
+		return delay;
+	}
+	public void setDelay(String delay) {
+		this.delay = delay;
+	}
 	public String getThreshold() {
 		return threshold;
 	}
