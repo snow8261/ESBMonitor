@@ -5,6 +5,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,6 +22,8 @@ public class FTPMonitorTask {
 	private MainConfiguration mainConfiguration;
 	@Autowired
 	private FTPMonitorJob ftpmonitorjob;
+	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	public void checkHourlyTask() {
 		List<Task> tasks = mainConfiguration.getTasks();
@@ -30,6 +34,10 @@ public class FTPMonitorTask {
 				String path = task.getPath();
 				String delay = task.getDelay();
 				int delayNum = 0;
+				logger.info("task:"+task);
+//				if(delay==null){
+//					continue;
+//				}
 				if (delay != null) {
 					delayNum = Integer.valueOf(delay);
 				}
@@ -37,11 +45,15 @@ public class FTPMonitorTask {
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 				String ftoday = today.format(formatter);
 				List<String> files = ftpmonitorjob.listRemoteFiles(server, path + "/" + ftoday, delayNum);
+				if(delayNum>0){
+					logger.info("XDR:"+files.size()+" "+delayNum);					
+				}
 				int threshold = Integer.valueOf(task.getThreshold());
 				if (files.size() >= threshold)
-					return;
+					continue;
 				String taskname = task.getNamecn();
 				String mess = taskname + " 上报数量 " + files.size() + " < 阀值 " + threshold + " 请核查！";
+				logger.info(mess);
 				sendMess(server, mess);
 			}
 		}
@@ -59,7 +71,7 @@ public class FTPMonitorTask {
 			ms.add(mess);
 		}
 		SMSSender sender = new SMSSender();
-		sender.sendSMS(ms);
+		//sender.sendSMS(ms);
 	}
 
 	public void checkDailyTask() {
