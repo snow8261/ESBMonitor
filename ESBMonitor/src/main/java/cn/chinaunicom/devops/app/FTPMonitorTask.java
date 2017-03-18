@@ -71,7 +71,7 @@ public class FTPMonitorTask {
 			ms.add(mess);
 		}
 		SMSSender sender = new SMSSender();
-		//sender.sendSMS(ms);
+		sender.sendSMS(ms);
 	}
 
 	public void checkDailyTask() {

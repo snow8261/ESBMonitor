@@ -139,3 +139,10 @@ myProps:
           desc: ftp://10.161.96.20:811@ftpuser2:oss20Ffp2:/WCDMA/MOBILE/ZTE/OMC/XDR
           namecn: 核心网中兴CS-XDR
           threshold: 20
+        - name: zb_hw_xdr
+          source: zb_ftp
+          path: /files/open_wy_pftp/esbdata/SH/LTE/MOBILE/HUAWEI/OMC1/CXDR
+          period: hourly
+          desc: ftp://10.162.6.225:21@open_wy_pftp:WY_ftp_0614:/files/open_wy_pftp/esbdata/SH/LTE/MOBILE/HUAWEI/OMC1/CXDR
+          namecn: 集团核心网华为PS-XDR
+          threshold: 20
