@@ -114,6 +114,9 @@ public class FTPMonitorJob {
 							String filename=file.getName();
 							Date frealtime= getDatefromFileName(filename);
 							LocalDateTime filerdate = frealtime.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+//							if(timecheck&& nowdelay.isBefore(filerdate)){
+//								System.out.println(filename);
+//							}
 							return  timecheck&& nowdelay.isBefore(filerdate);
 						}
 					}

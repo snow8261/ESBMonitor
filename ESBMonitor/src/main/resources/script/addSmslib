@@ -1,6 +1,8 @@
 mvn install:install-file -Dfile=e:\java\lib\sendsms-1.0.jar -DgroupId=cn.chinaunicom
 -DartifactId=sendsms -Dversion=1.0 -Dpackaging=jar
 
+mvn install:install-file -Dfile=e:\java\lib\IKAnalyzer3.2.8.jar -DgroupId=org.wltea.ik-analyzer -DartifactId=ik-analyzer -Dversion=3.2.8 -Dpackaging=jar
+
 SendSmsServiceSoap_address=http://10.0.72.231/SmsWebService/SendSmsService.asmx
 
 在 mirrors中增加
@@ -12,3 +14,13 @@ SendSmsServiceSoap_address=http://10.0.72.231/SmsWebService/SendSmsService.asmx
 </mirror> 
 
 spring boot 打包
+
+---
+   - name: ps_hw_xdr
+          source: ps_ftp
+          path: /LTE/MOBILE/HUAWEI/OMC1/XDR
+          period: hourly
+          desc: ftp://10.161.96.3:811@ftpuser5:oss20Ffp5:/LTE/MOBILE/HUAWEI/OMC1/XDR
+          namecn:  核心网华为PS-XDR20分钟内
+          threshold: 2
+          delay: 20

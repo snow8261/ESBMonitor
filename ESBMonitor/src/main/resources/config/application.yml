@@ -124,16 +124,8 @@ myProps:
           desc: ftp://10.161.96.20:811@ftpuser1:oss20Ffp1:/LTE/MOBILE/NOKIA/OMC1/TRACE
           namecn: 无线网诺西TRACE-OMC1
           threshold: 1
-        - name: ps_hw_xdr
-          source: ps_ftp
-          path: /LTE/MOBILE/HUAWEI/OMC1/XDR
-          period: hourly
-          desc: ftp://10.161.96.3:811@ftpuser5:oss20Ffp5:/LTE/MOBILE/HUAWEI/OMC1/XDR
-          namecn:  核心网华为PS-XDR20分钟内
-          threshold: 2
-          delay: 20
         - name: cs_zte_xdr
-          source: ps_ftp
+          source: wx_ftp
           path: /WCDMA/MOBILE/ZTE/OMC/XDR
           period: hourly
           desc: ftp://10.161.96.20:811@ftpuser2:oss20Ffp2:/WCDMA/MOBILE/ZTE/OMC/XDR

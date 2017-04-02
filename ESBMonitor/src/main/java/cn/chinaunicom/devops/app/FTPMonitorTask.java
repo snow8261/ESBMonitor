@@ -35,9 +35,9 @@ public class FTPMonitorTask {
 				String delay = task.getDelay();
 				int delayNum = 0;
 				logger.info("task:"+task);
-//				if(delay==null){
-//					continue;
-//				}
+				if(delay==null){
+					continue;
+				}
 				if (delay != null) {
 					delayNum = Integer.valueOf(delay);
 				}
@@ -45,9 +45,9 @@ public class FTPMonitorTask {
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 				String ftoday = today.format(formatter);
 				List<String> files = ftpmonitorjob.listRemoteFiles(server, path + "/" + ftoday, delayNum);
-				if(delayNum>0){
-					logger.info("XDR:"+files.size()+" "+delayNum);					
-				}
+//				if(delayNum>0){
+//					logger.info("XDR:"+files.size()+" "+delayNum);					
+//				}
 				int threshold = Integer.valueOf(task.getThreshold());
 				if (files.size() >= threshold)
 					continue;
@@ -71,7 +71,7 @@ public class FTPMonitorTask {
 			ms.add(mess);
 		}
 		SMSSender sender = new SMSSender();
-		sender.sendSMS(ms);
+//		sender.sendSMS(ms);
 	}
 
 	public void checkDailyTask() {
