@@ -100,7 +100,11 @@ public class FTPMonitorJob {
 				FTPFile[] files = ftp.listFiles(path, new FTPFileFilter() {
 					@Override
 					public boolean accept(FTPFile file) {
-							return  file.getSize()==0;
+						if(file.getName().endsWith("tmp")){
+							return false;
+						}
+						
+						return  file.getSize()==0;
 					}
 				});
 				for (FTPFile ftpfile : files) {
