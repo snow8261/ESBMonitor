@@ -71,6 +71,61 @@ public class FTPMonitorJob {
 		sender.sendSMS(ms);
 	}
 
+	public List<String> checkNullFiles(Server ftpserver, String path) {
+		FTPClient ftp = new FTPClient();
+		FTPClientConfig config = new FTPClientConfig();
+		ftp.configure(config);
+		boolean error = false;
+		List<String> lines = new ArrayList<String>();
+		try {
+			int reply;
+			String server = ftpserver.getIp();
+			int port = Integer.parseInt(ftpserver.getPort());
+			if (port > 0) {
+				ftp.connect(server, port);
+			} else {
+				ftp.connect(server);
+			}
+			System.out.println("Connected to " + server + ".");
+			System.out.print(ftp.getReplyString());
+			reply = ftp.getReplyCode();
+			if (!FTPReply.isPositiveCompletion(reply)) {
+				ftp.disconnect();
+				System.err.println("FTP server refused connection.");
+			}
+			ftp.enterLocalPassiveMode();
+
+			if (ftp.login(ftpserver.getUsername(), ftpserver.getPassword())) {
+				System.out.println("Remote system is " + ftp.getSystemType());
+				FTPFile[] files = ftp.listFiles(path, new FTPFileFilter() {
+					@Override
+					public boolean accept(FTPFile file) {
+							return  file.getSize()==0;
+					}
+				});
+				for (FTPFile ftpfile : files) {
+					lines.add(ftpfile.getName());
+				}
+				ftp.noop();
+			} else {
+				error = true;
+			}
+			ftp.logout();
+		} catch (IOException e) {
+			error = true;
+			e.printStackTrace();
+		} finally {
+			if (ftp.isConnected()) {
+				try {
+					ftp.disconnect();
+				} catch (IOException ioe) {
+					ioe.printStackTrace();
+				}
+			}
+		}
+		return lines;
+	}
+	
 	public List<String> listRemoteFiles(Server ftpserver, String path,int delay) {
 		FTPClient ftp = new FTPClient();
 		FTPClientConfig config = new FTPClientConfig();
