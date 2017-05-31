@@ -39,6 +39,14 @@ myProps:
           name: zb_ftp
           owner: qiwan,litongjie,fanjiming
           user: fanjiming,litongjie     
+        - ip: 172.25.7.206
+          port: 21
+          username: dsiftp
+          password: Admin123
+          potocol: ftp
+          name: huawei_ps_ftp
+          owner: qiwan,litongjie,fanjiming,fanhaifeng
+          user: fanjiming,litongjie,fanhaifeng
      tasks: 
         - name: wx_zte_pm
           source: wx_ftp
@@ -133,8 +141,16 @@ myProps:
           threshold: 20
         - name: zb_hw_xdr
           source: zb_ftp
-          path: /files/open_wy_pftp/esbdata/SH/LTE/MOBILE/HUAWEI/OMC1/CXDR
+          path: /files/open_wy_pftp/esbdata/SH/LTE/MOBILE/HUAWEI/OMC/CXDR
           period: hourly
-          desc: ftp://10.162.6.225:21@open_wy_pftp:WY_ftp_0614:/files/open_wy_pftp/esbdata/SH/LTE/MOBILE/HUAWEI/OMC1/CXDR
+          desc: ftp://10.162.6.225:21@open_wy_pftp:WY_ftp_0614:/files/open_wy_pftp/esbdata/SH/LTE/MOBILE/HUAWEI/OMC/CXDR
           namecn: 集团核心网华为PS-XDR
           threshold: 20
+        - name: ps_hw_xdr
+          source: huawei_ps_ftp
+          path: /srv/smartcare/dsiftp/XDR/LTE
+          period: hourly
+          desc: ftp://172.25.7.206:21@dsiftp:Admin123:/srv/smartcare/dsiftp/XDR/LTE
+          namecn:  核心网华为PS-XDR20分钟内
+          threshold: 2
+          delay: 20 
